@@ -1,4 +1,4 @@
-import { ArrowRight, Calendar, Clock, LinkIcon } from "lucide-react";
+import { Calendar, Clock, LinkIcon } from "lucide-react";
 export const features = [
   {
     icon: Calendar,
