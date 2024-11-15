@@ -34,7 +34,9 @@ export default function RootLayout({
       }}
     >
       <html lang="en">
-        <body className={`${bricolageGrotesque.className} antialiased`}>
+        <body
+          className={`${bricolageGrotesque.className} antialiased dotted-background`}
+        >
           <ThemeProvider attribute="class" defaultTheme="dark">
             <Header />
             <main className="min-h-screen">{children}</main>
