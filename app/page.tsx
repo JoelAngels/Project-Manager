@@ -1,6 +1,7 @@
 // import { Button } from "@/components/ui/button";
 // import Image from "next/image";
 
+import CallToAction from "./sections/CallToAction";
 import Carousel from "./sections/Carousel";
 import EssentialFeatures from "./sections/EssentialFeatures";
 import Faq from "./sections/Faq";
@@ -13,6 +14,7 @@ export default function Home() {
       <EssentialFeatures />
       <Carousel />
       <Faq />
+      <CallToAction />
     </div>
   );
 }
