@@ -12,16 +12,16 @@
     "answer": "Absolutely! Project Alpha is designed to be scalable and flexible. It works great for small teams and can easily grow with your organization as it expands. Our user-friendly interface ensures that teams of any size can quickly adapt and start benefiting from Project Alpha's features."
   },
   {
-    "Question": "What key features does Project Alpha offer?",
+    "question": "What key features does Project Alpha offer?",
     "Answer": "Project Alpha provides a range of powerful features including intuitive Kanban boards for visualizing workflow, robust sprint planning tools for agile teams, comprehensive reporting for data-driven decisions, customizable workflows, time tracking, and team collaboration tools. These features work seamlessly together to enhance your project management experience."
   },
 
   {
-    "Question": "Can Project Alpha handle multiple projects simultaneously?",
+    "question": "Can Project Alpha handle multiple projects simultaneously?",
     "Answer": "Yes, Project Alpha is built to manage multiple projects concurrently. You can easily switch between projects, and get a bird's-eye view of all your ongoing work. This makes Project Alpha ideal for organizations juggling multiple projects or clients."
   },
   {
-    "Question": "Is there a learning curve for new users?",
+    "question": "Is there a learning curve for new users?",
     "Answer": "While Project Alpha is packed with features, we've designed it with user-friendliness in mind. New users can quickly get up to speed thanks to our intuitive interface, helpful onboarding process, and comprehensive documentation."
   }
 ]
