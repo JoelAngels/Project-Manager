@@ -1,13 +1,15 @@
 import { SignedIn, SignedOut, SignInButton } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
 import { Button } from "./ui/button";
 import { PenBox } from "lucide-react";
 import logo from "@/assets/images/logo.jpg";
 import UserMenu from "./user-menu";
+import { checkUser } from "@/lib/checkUser";
 
-export default function Home() {
+const Header = async () => {
+  await checkUser();
+
   return (
     <nav className="container mx-auto py-2 px-4 flex justify-between items-center shadow-md border-b-2">
       <Link href="/" className="flex items-center">
@@ -40,6 +42,7 @@ export default function Home() {
       </div>
     </nav>
   );
-}
+};
 
 //10 % every day
+export default Header;
