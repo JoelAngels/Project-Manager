@@ -1,4 +1,5 @@
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
+import { NextResponse } from "next/server";
 
 const isProtectedRoute = createRouteMatcher([
   "/onboarding(.*)",
@@ -11,6 +12,17 @@ const isProtectedRoute = createRouteMatcher([
 export default clerkMiddleware((auth, req) => {
   if (!auth().userId && isProtectedRoute(req)) {
     return auth().redirectToSignIn();
+  }
+
+  //if user is logged in and has not created or selected an organization and the request.url is not equal to onboarding, redirect them to the onboarding page
+
+  if (
+    auth().userId &&
+    !auth().orgId &&
+    req.nextUrl.pathname !== "/onboarding" &&
+    req.nextUrl.pathname !== "/"
+  ) {
+    return NextResponse.redirect(new URL("/onboarding", req.url));
   }
 });
 
