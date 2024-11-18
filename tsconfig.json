@@ -27,7 +27,9 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "lib/prisma.js"
+    "lib/prisma.js",
+    "actions/onganization.js",
+    "app/(main)/onboarding/[[...onboarding]]/page.tsx"
   ],
   "exclude": ["node_modules"]
 }
