@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "./ui/button";
 import { PenBox } from "lucide-react";
-import logo from "@/assets/images/logo.jpg";
+import logo from "@/public/logo.png";
 import UserMenu from "./user-menu";
 import { checkUser } from "@/lib/checkUser";
 import UserLoading from "./userLoading";
