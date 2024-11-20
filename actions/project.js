@@ -100,3 +100,42 @@ export async function deleteProject(projectId) {
 
   return { success: true };
 }
+
+// getting the unique project from the Id
+export async function getProject(projectId) {
+  // only admins can delete projects from organization
+  const { userId, orgId } = auth();
+
+  //if user.id and organization id does not exist
+  if (!userId || !orgId) {
+    throw new Error("Unauthorized");
+  }
+  const user = await db.user.findUnique({
+    where: { clerkUserId: userId },
+  });
+
+  if (!user) {
+    throw new Error("User not found");
+  }
+
+  const project = await db.project.findUnique({
+    where: { id: projectId },
+    include: {
+      sprints: {
+        //all the sprints related to the project Id
+        orderBy: { createdAt: "desc" },
+      },
+    },
+  });
+
+  if (!project) {
+    return null;
+  }
+
+  //Verify project belongs to the organization
+  if (project.organizationId !== orgId) {
+    return null;
+  }
+
+  return project;
+}

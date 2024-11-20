@@ -32,7 +32,8 @@
     "app/(main)/onboarding/[[...onboarding]]/page.tsx",
     "next.config.mjs",
     "app/(main)/organization/[orgId]/page.jsx",
-    "app/(main)/project/create/page.jsx"
+    "app/(main)/project/create/page.jsx",
+    "app/(main)/project/[projectId]/page.jsx"
   ],
   "exclude": ["node_modules"]
 }
