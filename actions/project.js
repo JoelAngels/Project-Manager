@@ -6,6 +6,7 @@ import { auth, clerkClient } from "@clerk/nextjs/server";
 export async function createProject(data) {
   // get user and auth id from clerk
   const { userId, orgId } = auth();
+  // console.log("Auth details:", { userId, orgId });
 
   if (!userId) {
     throw new Error("Unauthorized");
@@ -18,9 +19,9 @@ export async function createProject(data) {
   //Check User if he or she is member of the organization
   const { data: membership } =
     await clerkClient().organizations.getOrganizationMembershipList({
-      organizationId: organization.id,
+      organizationId: orgId,
     });
-
+  // console.log("Membership:", membership);
   const userMembership = membership.find(
     (member) => member.publicUserData.userId === userId
   );
@@ -36,11 +37,12 @@ export async function createProject(data) {
         name: data.name,
         key: data.key,
         description: data.description,
-        organization: orgId,
+        organizationId: orgId,
       },
     });
     return project;
   } catch (error) {
-    throw new Error("Error creating project:" + error.message);
+    // console.error("Error creating project:", error);
+    throw new Error("Error creating project: " + error.message);
   }
 }
