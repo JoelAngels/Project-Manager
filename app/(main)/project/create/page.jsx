@@ -8,12 +8,17 @@ import { projectSchema } from "@/app/lib/validators";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
+import useFetch from "@/hooks/useFetch";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
+import { createProject } from "../../../../actions/project";
 
 const CreateProjectPage = () => {
   //user is admin or not
   const { isLoaded: isOrgLoaded, membership } = useOrganization();
   const { isLoaded: isUserLoaded } = useUser();
   const [isAdmin, setIsAdmin] = useState(false);
+  const router = useRouter();
 
   const {
     register,
@@ -23,8 +28,6 @@ const CreateProjectPage = () => {
     resolver: zodResolver(projectSchema),
   });
 
-  const onSubmit = async () => {};
-
   useEffect(() => {
     //check if organization, user is loaded or not
     if (isOrgLoaded && isUserLoaded && membership) {
@@ -32,10 +35,25 @@ const CreateProjectPage = () => {
     }
   }, [isOrgLoaded, isUserLoaded, membership]);
 
+  const {
+    data: project,
+    loading,
+    error,
+    fn: createProjectFn,
+  } = useFetch(createProject);
+
+  useEffect(() => {
+    if (project) {
+      toast.success("Project created successfully");
+      router.push(`/project/${project.id}`);
+    }
+  }, [loading]);
+
   //check if organization, user is not loaded
   if (!isOrgLoaded || !isUserLoaded) {
     return null;
   }
+
   //check if user is not an admin
   if (!isAdmin) {
     return (
@@ -47,6 +65,11 @@ const CreateProjectPage = () => {
       </div>
     );
   }
+
+  const onSubmit = async (data) => {
+    createProjectFn(data);
+  };
+
   return (
     <div className="container mx-auto">
       <h1 className="text-6xl gradient-title text-center font-bold mb-8">
@@ -101,9 +124,10 @@ const CreateProjectPage = () => {
           )}
         </div>
 
-        <Button type="submit" size="lg">
-          Create Project
+        <Button type="submit" size="lg" disabled={loading}>
+          {loading ? "Creating..." : "Create Project"}
         </Button>
+        {error && <p className="text-red-500 text-sm mt-2">{errors.message}</p>}
       </form>
     </div>
   );

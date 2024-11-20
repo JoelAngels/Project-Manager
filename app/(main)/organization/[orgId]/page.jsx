@@ -1,13 +1,10 @@
-import { getOrganization } from "@/actions/onganization";
+import { getOrganization } from "@/actions/organization";
 import OrgSwitcher from "@/components/OrgSwitcher";
 
-interface Params {
-  orgId: string;
-}
-
-const Organization = async ({ params }: { params: Params }) => {
-  const { orgId } = await params;
+const Organization = async ({ params }) => {
+  const { orgId } = params;
   const organization = await getOrganization(orgId);
+
   if (!organization) {
     return <div>Organization not found</div>;
   }

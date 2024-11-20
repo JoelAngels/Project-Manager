@@ -29,7 +29,10 @@
     ".next/types/**/*.ts",
     "lib/prisma.js",
     "actions/onganization.js",
-    "app/(main)/onboarding/[[...onboarding]]/page.tsx"
+    "app/(main)/onboarding/[[...onboarding]]/page.tsx",
+    "next.config.mjs",
+    "app/(main)/organization/[orgId]/page.jsx",
+    "app/(main)/project/create/page.jsx"
   ],
   "exclude": ["node_modules"]
 }
