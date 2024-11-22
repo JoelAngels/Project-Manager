@@ -46,3 +46,38 @@ export async function getOrganization(slug) {
 
   return organization;
 }
+
+export async function getOrganizationUsers(orgId) {
+  const { userId } = auth();
+  if (!userId) {
+    throw new Error("Unauthorized");
+  }
+
+  //Check if user exists in our database or not
+  const user = await db.user.findUnique({
+    where: { clerkUserId: userId },
+  });
+
+  if (!user) {
+    throw new Error("User not found");
+  }
+
+  const organizationMemberShips =
+    await clerkClient().organizations.getOrganizationMembershipList({
+      organizationId: orgId,
+    });
+
+  const userIds = organizationMemberShips.data.map(
+    (membership) => membership.publicUserData.userId
+  );
+
+  const users = await db.user.findMany({
+    where: {
+      clerkUserId: {
+        id: userIds,
+      },
+    },
+  });
+
+  return users;
+}
