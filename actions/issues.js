@@ -27,11 +27,11 @@ export async function createIssue(projectId, data) {
       description: data.description,
       status: data.status,
       priority: data.priority,
-      projectId: data.projectId,
+      projectId: projectId,
       sprintId: data.sprintId,
       reporterId: user.id,
-      assigneeId: data.assigneeId || null,
-      order: data.newOrder,
+      assigneeId: data.assigneeId || null, // Add this line
+      order: newOrder,
     },
     include: {
       assignee: true,
@@ -40,4 +40,23 @@ export async function createIssue(projectId, data) {
   });
 
   return issue;
+}
+
+export async function getIssuesForSprint(sprintId) {
+  const { userId, orgId } = auth();
+
+  if (!userId || !orgId) {
+    throw new Error("Unauthorized");
+  }
+
+  const issues = await db.issue.findMany({
+    where: { sprintId },
+    orderBy: [{ status: "asc" }, { order: "asc" }],
+    include: {
+      assignee: true,
+      reporter: true,
+    },
+  });
+
+  return issues;
 }

@@ -62,22 +62,22 @@ enum SprintStatus {
 }
 
 model Issue {
-  id           String @id @default(cuid())
+  id           String         @id @default(cuid())
   title        String 
   description  String?
   status       IssueStatus
-  order        Int  //This will store the oder within its status column
+  order        Int            //This will store the oder within its status column
   priority     IssuePriority
-  assignee     User?   @relation("Assignee", fields: [assigneeId], references: [id])
+  assignee     User?          @relation("Assignee", fields: [assigneeId], references: [id])
   assigneeId   String?
-  reporter     User    @relation("Reporter", fields: [reportedId], references: [id])
-  reportedId   String
-  project      Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  reporter     User           @relation("Reporter", fields: [reporterId], references: [id])
+  reporterId   String
+  project      Project        @relation(fields: [projectId], references: [id], onDelete: Cascade)
   projectId    String
-  sprint       Sprint? @relation(fields: [sprintId], references: [id], onDelete: SetNull)
+  sprint       Sprint?        @relation(fields: [sprintId], references: [id], onDelete: SetNull)
   sprintId     String?
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
 
   @@index([status, order])
 }
