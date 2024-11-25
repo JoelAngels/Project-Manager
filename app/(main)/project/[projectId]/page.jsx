@@ -11,6 +11,7 @@ const ProjectPage = async ({ params }) => {
   if (!project) {
     notFound();
   }
+
   return (
     <div className="container mx-auto">
       <SprintCreationForm

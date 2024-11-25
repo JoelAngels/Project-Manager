@@ -74,7 +74,7 @@ export async function getOrganizationUsers(orgId) {
   const users = await db.user.findMany({
     where: {
       clerkUserId: {
-        id: userIds,
+        in: userIds,
       },
     },
   });
