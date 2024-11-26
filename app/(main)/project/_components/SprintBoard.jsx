@@ -9,6 +9,8 @@ import { DragDropContext, Draggable, Droppable } from "@hello-pangea/dnd";
 import useFetch from "@/hooks/useFetch";
 import statuses from "@/data/status";
 import IssueCreationDrawer from "./CreateIssue";
+import { getIssuesForSprint } from "@/actions/issues";
+import IssueCard from "@/components/IssueCard";
 
 const SprintBoard = ({ projectId, sprints, orgId }) => {
   /**
@@ -21,6 +23,28 @@ const SprintBoard = ({ projectId, sprints, orgId }) => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [selectedStatus, setSelectedStatus] = useState(null);
 
+  const {
+    loading: issuesLoading,
+    error: issuesError,
+    fn: fetchIssues,
+    data: issues,
+    setData: setIssues,
+  } = useFetch(getIssuesForSprint);
+
+  const [filteredIssues, setFilteredIssues] = useState(issues);
+
+  // const handleFilterChange = (newFilteredIssues) => {
+  //   setFilteredIssues(newFilteredIssues);
+  // };
+
+  useEffect(() => {
+    //* fetch issues if the currentSprint Id is there, fetchIssues take the sprint Id
+    if (currentSprint.id) {
+      fetchIssues(currentSprint.id);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentSprint.id]);
+
   const handleAddIssue = (status) => {
     setSelectedStatus(status);
     setIsDrawerOpen(true);
@@ -28,10 +52,12 @@ const SprintBoard = ({ projectId, sprints, orgId }) => {
 
   const handleIssueCreated = () => {
     //! fetch issues again
+    fetchIssues(currentSprint.id);
   };
 
   const onDragend = () => {};
 
+  if (issuesError) return <div>Error loading issues</div>;
   return (
     <>
       <SprintManager
@@ -40,6 +66,22 @@ const SprintBoard = ({ projectId, sprints, orgId }) => {
         sprints={sprints}
         projectId={projectId}
       />
+
+      {issuesLoading && (
+        <BarLoader className="mt-4" width={"100%"} color="#36d7b7" />
+      )}
+
+      {/* {issues && !issuesLoading && (
+        <BoardFilters issues={issues} onFilterChange={handleFilterChange} />
+      )}
+
+      {updateIssuesError && (
+        <p className="text-red-500 mt-2">{updateIssuesError.message}</p>
+      )}
+      {(updateIssuesLoading || issuesLoading) && (
+        <BarLoader className="mt-4" width={"100%"} color="#36d7b7" />
+      )} */}
+
       {/* /* * ! Kanban Board  */}
       <DragDropContext onDragEnd={onDragend}>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-4 bg-slate-900 p-4 rounded-lg">
@@ -55,8 +97,39 @@ const SprintBoard = ({ projectId, sprints, orgId }) => {
                     <h3 className="font-semibold mb-2 text-center">
                       {column.name}
                     </h3>
-
                     {/* Issues */}
+                    {issues
+                      ?.filter((issue) => issue.status === column.key)
+                      .map((issue, index) => (
+                        <Draggable
+                          key={issue.id}
+                          draggableId={issue.id}
+                          index={index}
+                          // isDragDisabled={updateIssuesLoading}
+                        >
+                          {(provided) => (
+                            <div
+                              ref={provided.innerRef}
+                              {...provided.draggableProps}
+                              {...provided.dragHandleProps}
+                            >
+                              <IssueCard
+                                issue={issue}
+                                // onDelete={() => fetchIssues(currentSprint.id)}
+                                // onUpdate={(updated) =>
+                                //   setIssues((issues) =>
+                                //     issues.map((issue) => {
+                                //       if (issue.id === updated.id)
+                                //         return updated;
+                                //       return issue;
+                                //     })
+                                //   )
+                                // }
+                              />
+                            </div>
+                          )}
+                        </Draggable>
+                      ))}
                     {provided.placeholder}
                     {column.key === "TODO" &&
                       currentSprint.status !== "COMPLETED" && (
