@@ -10,7 +10,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { formatDistanceToNow } from "date-fns";
-// import IssueDetailsDialog from "./issue-details-dialog";
+import IssueDetailsDialog from "./IssueDetailsDialog";
 import UserAvatar from "./UserAvatar";
 import { useRouter } from "next/navigation";
 
@@ -30,15 +30,15 @@ export default function IssueCard({
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const router = useRouter();
 
-  // const onDeleteHandler = (...params) => {
-  //   router.refresh();
-  //   onDelete(...params);
-  // };
+  const onDeleteHandler = (...params) => {
+    router.refresh();
+    onDelete(...params);
+  };
 
-  // const onUpdateHandler = (...params) => {
-  //   router.refresh();
-  //   onUpdate(...params);
-  // };
+  const onUpdateHandler = (...params) => {
+    router.refresh();
+    onUpdate(...params);
+  };
 
   const created = formatDistanceToNow(new Date(issue.createdAt), {
     addSuffix: true,
@@ -69,8 +69,7 @@ export default function IssueCard({
         </CardFooter>
       </Card>
 
-      {
-        isDialogOpen && <></> /* {isDialogOpen && (
+      {isDialogOpen && (
         <IssueDetailsDialog
           isOpen={isDialogOpen}
           onClose={() => setIsDialogOpen(false)}
@@ -79,8 +78,7 @@ export default function IssueCard({
           onUpdate={onUpdateHandler}
           borderCol={priorityColor[issue.priority]}
         />
-      )} */
-      }
+      )}
     </>
   );
 }
