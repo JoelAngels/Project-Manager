@@ -11,6 +11,7 @@ import statuses from "@/data/status";
 import IssueCreationDrawer from "./CreateIssue";
 import { getIssuesForSprint, updateIssueOrder } from "@/actions/issues";
 import IssueCard from "@/components/IssueCard";
+import BoardFilters from "./BoardFilters";
 
 function reorder(list, startIndex, endIndex) {
   //* [61, 22, 4, 5]
@@ -43,9 +44,9 @@ const SprintBoard = ({ projectId, sprints, orgId }) => {
 
   const [filteredIssues, setFilteredIssues] = useState(issues);
 
-  // const handleFilterChange = (newFilteredIssues) => {
-  //   setFilteredIssues(newFilteredIssues);
-  // };
+  const handleFilterChange = (newFilteredIssues) => {
+    setFilteredIssues(newFilteredIssues);
+  };
 
   useEffect(() => {
     //* fetch issues if the currentSprint Id is there, fetchIssues take the sprint Id
@@ -150,13 +151,13 @@ const SprintBoard = ({ projectId, sprints, orgId }) => {
         projectId={projectId}
       />
 
-      {/* {issuesLoading && (
+      {issuesLoading && (
         <BarLoader className="mt-4" width={"100%"} color="#36d7b7" />
       )}
 
       {issues && !issuesLoading && (
         <BoardFilters issues={issues} onFilterChange={handleFilterChange} />
-      )} */}
+      )}
 
       {updateIssuesError && (
         <p className="text-red-500 mt-2">{updateIssuesError.message}</p>
@@ -181,7 +182,7 @@ const SprintBoard = ({ projectId, sprints, orgId }) => {
                       {column.name}
                     </h3>
                     {/* Issues */}
-                    {issues
+                    {filteredIssues
                       ?.filter((issue) => issue.status === column.key)
                       .map((issue, index) => (
                         <Draggable

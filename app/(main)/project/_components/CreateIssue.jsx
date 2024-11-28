@@ -201,7 +201,6 @@ export default function IssueCreationDrawer({
           </Button>
         </form>
         <DrawerFooter>
-          <Button>Submit</Button>
           <DrawerClose>
             <Button variant="outline">Cancel</Button>
           </DrawerClose>
