@@ -3,7 +3,7 @@ import { getUserIssues } from "@/actions/issues";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import IssueCard from "@/components/IssueCard";
 
-export default async function ({ userId }) {
+const UserIssues = async ({ userId }) => {
   const issues = await getUserIssues(userId);
 
   if (issues.length === 0) {
@@ -39,7 +39,7 @@ export default async function ({ userId }) {
       </Tabs>
     </>
   );
-}
+};
 
 function IssueGrid({ issues }) {
   return (
@@ -50,3 +50,5 @@ function IssueGrid({ issues }) {
     </div>
   );
 }
+
+export default UserIssues;
