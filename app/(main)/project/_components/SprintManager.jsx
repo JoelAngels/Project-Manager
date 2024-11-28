@@ -13,6 +13,7 @@ import { Badge } from "@/components/ui/badge";
 import useFetch from "@/hooks/useFetch";
 import { updateSprintStatus } from "@/actions/sprints";
 import { BarLoader } from "react-spinners";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const SprintManager = ({ sprint, setSprint, sprints, projectId }) => {
   // fetch the status
@@ -21,7 +22,8 @@ const SprintManager = ({ sprint, setSprint, sprints, projectId }) => {
   const startDate = new Date(sprint.startDate);
   const endDate = new Date(sprint.endDate);
   const now = new Date();
-
+  const searchParams = useSearchParams();
+  const router = useRouter();
   //   1. Check if the current date and time (`now`) is before the `endDate`.
   //   - If true, continue; otherwise, the result is false.
 
@@ -61,6 +63,7 @@ const SprintManager = ({ sprint, setSprint, sprints, projectId }) => {
     const selectedSprint = sprints.find((s) => s.id === value);
     setSprint(selectedSprint);
     setStatus(selectedSprint.status);
+    router.replace(`/project/${projectId}`, undefined, { shallow: true });
   };
 
   const getStatusText = () => {
@@ -76,6 +79,17 @@ const SprintManager = ({ sprint, setSprint, sprints, projectId }) => {
     return null;
   };
 
+  useEffect(() => {
+    const sprintId = searchParams.get("sprint");
+    if (sprintId && sprintId !== sprint.id) {
+      const selectedSprint = sprints.find((s) => s.id === sprintId);
+      if (selectedSprint) {
+        setSprint(selectedSprint);
+        setStatus(selectedSprint.status);
+      }
+    }
+  }, [searchParams, sprints]);
+
   return (
     <>
       <div className="flex justify-between items-center gap-4">
@@ -87,8 +101,8 @@ const SprintManager = ({ sprint, setSprint, sprints, projectId }) => {
             {sprints.map((sprint) => {
               return (
                 <SelectItem key={sprint.id} value={sprint.id}>
-                  {sprint.name} ({format(sprint.startDate, "MMM d, yyy")}) to{" "}
-                  {format(sprint.endDate, "MMM d, yyy")}
+                  {sprint.name} ({format(sprint.startDate, "MMM d, yyyy")}) to{" "}
+                  {format(sprint.endDate, "MMM d, yyyy")}
                 </SelectItem>
               );
             })}
