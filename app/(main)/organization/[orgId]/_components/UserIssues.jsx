@@ -3,7 +3,10 @@ import { getUserIssues } from "@/actions/issues";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import IssueCard from "@/components/IssueCard";
 
-const UserIssues = async ({ userId }) => {
+
+
+
+async function UserIssues({ userId }) {
   const issues = await getUserIssues(userId);
 
   if (issues.length === 0) {
