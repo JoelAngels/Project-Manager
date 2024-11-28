@@ -3,6 +3,9 @@ import { getUserIssues } from "@/actions/issues";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import IssueCard from "@/components/IssueCard";
 
+
+
+
 async function UserIssues({ userId }) {
   const issues = await getUserIssues(userId);
 
@@ -39,7 +42,7 @@ async function UserIssues({ userId }) {
       </Tabs>
     </>
   );
-}
+};
 
 function IssueGrid({ issues }) {
   return (
