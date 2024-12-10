@@ -57,7 +57,7 @@ export default function BoardFilters({ issues, onFilterChange }) {
     selectedPriority !== "";
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 px-4">
       <div className="flex flex-col pr-2 sm:flex-row gap-4 sm:gap-6 mt-6">
         <Input
           className="w-full sm:w-72"
@@ -107,7 +107,7 @@ export default function BoardFilters({ issues, onFilterChange }) {
 
         {isFiltersApplied && (
           <Button
-            variant="ghost"
+            variant="default"
             onClick={clearFilters}
             className="flex items-center"
           >
