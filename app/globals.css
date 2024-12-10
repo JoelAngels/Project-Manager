@@ -2,10 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  font-family: "Bricolage Grotesque", serif;
-}
-
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -63,14 +59,35 @@ body {
   }
 }
 
-@layer base {
+@layer components {
+  .section-title {
+    @apply text-center text-3xl md:text-[54px] md:leading-[60px] font-bold tracking-tighter bg-gradient-to-b from-black to-[#001E80] text-transparent bg-clip-text;
+  }
+
+  .section-description {
+    @apply text-center text-[22px] leading-[30px] tracking-tight text-[#010D3E];
+  }
+
+  .section-heading {
+    @apply max-w-[540px] mx-auto;
+  }
+
+  .card {
+    @apply p-10 border border-[#F1F1F1] rounded-3xl shadow-[0_7px_14px_#EAEAEA] max-w-xs w-full;
+  }
+  .tag {
+    @apply text-sm inline-flex border border-[#222]/10 px-3 py-1 rounded-lg tracking-tight;
+  }
+}
+
+/* @layer base {
   * {
     @apply border-border;
   }
   body {
     @apply bg-background text-foreground;
   }
-}
+} */
 
 .dotted-background {
   background-color: #0a111f;
@@ -84,8 +101,8 @@ body {
   }
 }
 
-.wmde-markdown ul {
+/* .wmde-markdown ul {
   list-style-type: disc;
   padding-left: 15px !important;
   color: white;
-}
+} */

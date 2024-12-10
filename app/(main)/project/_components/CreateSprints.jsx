@@ -63,7 +63,7 @@ const SprintCreationForm = ({
   return (
     <>
       <div className="flex justify-between">
-        <h1 className="text-5xl font-bold mb-8 gradient-title">
+        <h1 className="text-5xl font-bold mb-8 section-title">
           {projectTitle}
         </h1>
         <Button

@@ -73,7 +73,7 @@ const CreateProjectPage = () => {
   return (
     <div className="container mx-auto">
       <h1 className="text-6xl gradient-title text-center font-bold mb-8">
-        CreateProjectPage
+        Create Project Page
       </h1>
 
       <form

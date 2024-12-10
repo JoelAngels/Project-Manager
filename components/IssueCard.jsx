@@ -47,7 +47,7 @@ export default function IssueCard({
   return (
     <>
       <Card
-        className="cursor-pointer hover:shadow-md transition-shadow"
+        className="cursor-pointer hover:shadow-md transition-shadow bg-black text-white"
         onClick={() => setIsDialogOpen(true)}
       >
         <CardHeader
