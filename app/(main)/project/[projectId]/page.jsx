@@ -13,7 +13,7 @@ const ProjectPage = async ({ params }) => {
   }
 
   return (
-    <div className="container mx-auto">
+    <div className="container mx-auto dotted-background">
       <SprintCreationForm
         projectTitle={project.name}
         projectId={projectId}

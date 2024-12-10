@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Bricolage_Grotesque } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
-import Header from "@/components/Header";
+import Header from "@/app/sections/Header";
 import { ClerkProvider } from "@clerk/nextjs";
 import { shadesOfPurple } from "@clerk/themes";
 import { Toaster } from "sonner";
@@ -36,6 +36,20 @@ export default function RootLayout({
     >
       <html lang="en">
         <body
+          className={`${bricolageGrotesque.className} antialiased bg-[#EAEEFE]`}
+        >
+          <Header />
+          {children}
+          <Toaster richColors />
+        </body>
+      </html>
+    </ClerkProvider>
+  );
+}
+
+/*
+      <html lang="en">
+        <body
           className={`${bricolageGrotesque.className} antialiased dotted-background`}
         >
           <ThemeProvider attribute="class" defaultTheme="dark">
@@ -50,6 +64,20 @@ export default function RootLayout({
           </ThemeProvider>
         </body>
       </html>
-    </ClerkProvider>
-  );
-}
+*/
+
+/*
+     <html lang="en">
+        <body
+          className={`${bricolageGrotesque.className} antialiased dotted-background`}
+        >
+          {children}
+          <Toaster richColors />
+          {/* <footer className="bg-gray-900 py-12">
+            <div className="container mx-auto px-4 text-center text-gray-200">
+              <p>Made with ♥ by Joel Angels</p>
+            </div>
+          </footer> 
+          </body>
+          </html>
+*/

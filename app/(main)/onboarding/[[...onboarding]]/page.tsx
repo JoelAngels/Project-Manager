@@ -13,7 +13,7 @@ const OnBoarding = () => {
     }
   }, [organization]);
   return (
-    <div className="flex justify-center items-center pt-14">
+    <div className="flex justify-center items-center pt-14 bg-[radial-gradient(ellipse_200%_100%_at_bottom_left,#183EC2,#EAEEFE_100%)] overflow-x-clip min-h-screen">
       <OrganizationList
         hidePersonal
         afterCreateOrganizationUrl="/organization/:slug"
