@@ -18,9 +18,9 @@ const Organization = async ({ params }) => {
     return <div>Organization not found</div>;
   }
   return (
-    <div className="container mx-auto dotted-background">
+    <div className="container mx-auto">
       <div className="mb-4 flex flex-col sm:flex-row justify-between items-start pt-10">
-        <h1 className="text-5xl font-bold gradient-title pb-2">
+        <h1 className="text-5xl font-bold section-title pb-2">
           {organization.name}&rsquo;s Project
         </h1>
         {/* ORG Switcher */}

@@ -3,13 +3,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "../../components/ui/button";
 import { PenBox } from "lucide-react";
-import logo from "@/public/logo.png";
 import UserMenu from "../../components/user-menu";
 import { checkUser } from "@/lib/checkUser";
 import UserLoading from "../../components/userLoading";
 import ArrowRight from "@/assets/arrow-right.svg";
 import Logo from "@/assets/logosaas.png";
 import MenuIcon from "@/assets/menu.svg";
+import Navbar from "@/components/Navbar";
 
 const Header = async () => {
   await checkUser();
@@ -26,7 +26,7 @@ const Header = async () => {
         </div>
       </div>
       <div className="py-5">
-        <div className="container">
+        <div className="container mx-auto px-10">
           <div className="flex items-center justify-between">
             <Link href="/">
               <Image src={Logo} alt="Saas Logo" height={40} width={40} />
@@ -34,11 +34,7 @@ const Header = async () => {
 
             <MenuIcon className="h-5 w-5 md:hidden" />
             <nav className="hidden md:flex gap-6 text-black items-center">
-              <a href="#">About</a>
-              <a href="#">Features</a>
-              <a href="#">Customers</a>
-              <a href="#">Updates</a>
-              <a href="#">Help</a>
+              <Navbar />
 
               <Link href="/project/create">
                 <Button className="destructive">
@@ -48,7 +44,9 @@ const Header = async () => {
               </Link>
               <SignedOut>
                 <SignInButton forceRedirectUrl="/onboarding">
-                  <Button variant="outline">Login</Button>
+                  <Button variant="outline" className="text-white">
+                    Login
+                  </Button>
                 </SignInButton>
               </SignedOut>
 

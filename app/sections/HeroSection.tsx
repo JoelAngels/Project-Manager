@@ -2,10 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { ChevronRight } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
-import logo from "@/public/logo.png";
-import ArrowIcon from "@/assets/arrow-right.svg";
 import cogImage from "@/assets/cog.png";
 import cylinderImage from "@/assets/cylinder.png";
 import noodleImage from "@/assets/noodle.png";
@@ -23,16 +20,17 @@ const HeroSection = () => {
 
   return (
     <section className="pt-8 pb-20 md:pt-5 md:pb-10 bg-[radial-gradient(ellipse_200%_100%_at_bottom_left,#183EC2,#EAEEFE_100%)] overflow-x-clip">
-      <div className="container">
+      <div className="container mx-auto px-10 md:px-20">
         <div className="md:flex items-center">
-          <div className="md:w-[478px]">
-            <div className="tag">Version 2.0 is here</div>
+          <div className="md:w-[573px]">
+            <div className="tag font-bold">Version 2.0 is here</div>
             <h1 className="text-5xl md:text-7xl font-bold tracking-tighter bg-gradient-to-b from-black to-[#001E80] text-transparent bg-clip-text mt-6">
               Pathway to productivity
             </h1>
             <p className="text-xl text-[#010D3E] tracking-tight mt-6">
-              Celebrate the joy of accomplishment with an app designed to trace
-              your progress, motivate your efforts, and celebrate your success
+              Streamline your workflow with an app built to track progress,
+              boost productivity, and celebrate every achievement—your ultimate
+              tool for efficient teamwork and success.
             </p>
             <div className="flex gap-1 items-center mt-[30px]">
               <Link href="/onboarding">
@@ -70,7 +68,7 @@ const HeroSection = () => {
               alt="Cylinder Image"
               width={220}
               height={220}
-              className="hidden md:block -top-8 -left-32 md:absolute lg:left-[80px] lg:-top-[100px]"
+              className="hidden md:block -top-8 -left-32 md:absolute lg:left-[60px] lg:-top-[100px]"
             />
             <motion.img
               style={{
@@ -80,7 +78,7 @@ const HeroSection = () => {
               src={noodleImage.src}
               alt="Noodle Image"
               width={220}
-              className="hidden lg:block md:left-[700px] top-[472px] left-[448px] md:absolute rotate-[30deg]"
+              className="hidden lg:block md:left-[700px] top-[450px] left-[448px] md:absolute rotate-[30deg]"
             />
           </div>
         </div>

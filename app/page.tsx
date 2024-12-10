@@ -1,22 +1,19 @@
-import Header from "@/app/sections/Header";
-import CallToAction from "./sections/CallToAction";
-import Carousel from "./sections/Carousel";
-import EssentialFeatures from "./sections/EssentialFeatures";
 import Faq from "./sections/Faq";
 import HeroSection from "./sections/HeroSection";
 import { LogoTicker } from "./sections/LogoTicker";
 import { ProductShowcase } from "./sections/ProductShowcase";
+import { Testimonials } from "./sections/Testimonials";
+import { CallToAction } from "./sections/CallToAction";
 
 export default function Home() {
   return (
-    <div>
+    <div className="">
       <HeroSection />
       <LogoTicker />
       <ProductShowcase />
-      <EssentialFeatures />
-      <Carousel />
-      <Faq />
+      <Testimonials />
       <CallToAction />
+      <Faq />
     </div>
   );
 }

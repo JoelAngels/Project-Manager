@@ -36,11 +36,13 @@ export default function RootLayout({
     >
       <html lang="en">
         <body
-          className={`${bricolageGrotesque.className} antialiased bg-[#EAEEFE]`}
+          className={`${bricolageGrotesque.className} antialiased bg-[radial-gradient(ellipse_200%_100%_at_bottom_left,#183EC2,#EAEEFE_100%)] overflow-x-clip min-h-screen`}
         >
-          <Header />
-          {children}
-          <Toaster richColors />
+          <ThemeProvider attribute="class" defaultTheme="dark">
+            <Header />
+            {children}
+            <Toaster richColors />
+          </ThemeProvider>
         </body>
       </html>
     </ClerkProvider>
