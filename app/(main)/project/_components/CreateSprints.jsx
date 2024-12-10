@@ -62,12 +62,12 @@ const SprintCreationForm = ({
   };
   return (
     <>
-      <div className="flex justify-between">
-        <h1 className="text-5xl font-bold mb-8 section-title">
+      <div className="flex justify-between px-4 py-5">
+        <h1 className="text-3xl md:text-5xl font-bold mb-8 section-title">
           {projectTitle}
         </h1>
         <Button
-          className="mt-2"
+          className=""
           onClick={() => setShowForm(!showForm)}
           variant={showForm ? "destructive" : "default"}
         >
